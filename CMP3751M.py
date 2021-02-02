@@ -39,19 +39,26 @@ matplotlib.pyplot.title("Density plot of clinical_dataset.xlsx BMI, categorised 
 matplotlib.pyplot.legend(['Healthy', "Cancerous"])
 matplotlib.pyplot.savefig('s1Densityplot')
 
-#catagorical data converted to bool where 0=healthy.
-data['Status'] = pandas.get_dummies(data['Status'],drop_first=True)
-data['Status'] = data['Status'].replace({0:1,1:0})
+#catagorical data converted to bool where 0=healthy and placed in output array (y).
+y = pandas.get_dummies(data['Status'],drop_first=True)
+y = y.replace({0:1,1:0})
+y = numpy.ravel(y,order='C')#solves sklearn compatability issue.
+data = data.drop(['Status'],1)
 
-#normalises data for machine learning
+
+#normalises data for machine learning and palces data in x.
 scaler = sklearn.preprocessing.MinMaxScaler()
 scaler.fit(data)
-data = scaler.transform(data)
+x = scaler.transform(data)
 
 #data is now fully normilised and ready for machine learning.
-print(data)
+print(x)
+print(y)
 
+#split data between test and train set 1:9 ratio.
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.1)
 
+net = MLPClassifier((500,500),'logistic',max_iter=500);
+net.fit(x_train, y_train)
 
-net = MLPClassifier((500,500),'logistic','lbfgs');
-#net.fit(
+print("output function: ", net.out_activation_)
