@@ -2,6 +2,8 @@ import pandas
 import numpy
 import matplotlib.pyplot
 import sklearn.preprocessing
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import train_test_split
 from sys import getsizeof
 print("numpy version: ", numpy.__version__)
 print("pands version: ", pandas.__version__)
@@ -11,6 +13,7 @@ print("pands version: ", pandas.__version__)
 
 #reads data prints exert and produces stastical measure table output to "dataset_stats.xlsx"
 data = pandas.read_excel (r'clinical_dataset.xlsx')
+
 print(data)
 data.describe().to_excel("dataset_stats.xlsx")
 print("data total memory size: ", getsizeof(data), "bytes.")
@@ -36,15 +39,19 @@ matplotlib.pyplot.title("Density plot of clinical_dataset.xlsx BMI, categorised 
 matplotlib.pyplot.legend(['Healthy', "Cancerous"])
 matplotlib.pyplot.savefig('s1Densityplot')
 
-
-#catagorical data converted to bool where 1=healthy.
+#catagorical data converted to bool where 0=healthy.
 data['Status'] = pandas.get_dummies(data['Status'],drop_first=True)
+data['Status'] = data['Status'].replace({0:1,1:0})
 
 #normalises data for machine learning
 scaler = sklearn.preprocessing.MinMaxScaler()
 scaler.fit(data)
 data = scaler.transform(data)
 
-#data is now fullyt normilised and ready for machine learning.
+#data is now fully normilised and ready for machine learning.
 print(data)
 
+
+
+net = MLPClassifier((500,500),'logistic','lbfgs');
+#net.fit(
