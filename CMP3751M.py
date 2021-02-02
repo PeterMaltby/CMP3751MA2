@@ -3,6 +3,7 @@ import numpy
 import matplotlib.pyplot
 import sklearn.preprocessing
 from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sys import getsizeof
@@ -63,23 +64,30 @@ print(y)
 #split data between test and train set 1:9 ratio.
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.1)
 
-
+#tmp vars for accuracy plots.
 accuracyScores_test = []
 accuracyScores_train = []
 
-iter = 500
+#iter var states how many epochs of data to run.
+#creates neurel network tiwh 2 hidden layers with 500 nodes each using logisitic activation function.
+iter = 1
 net = MLPClassifier((500,500),'logistic',max_iter=iter);
 
+#loops through data and records accuracy for each epoch.
 for n in range (1,iter):
-    
+    #single epoch run.
     net.partial_fit(x_train, y_train, classes=numpy.unique(y_train))
 
+    #record accuracies and add to array for graph.
     predicted = net.predict(x_test)
     accuracyScores_test.append(accuracy_score(y_test, predicted))
     print ("accuracy of neural network = ", accuracy_score(y_test, predicted))
     predicted = net.predict(x_train)
     accuracyScores_train.append(accuracy_score(y_train, predicted))
     
+    print("output function: ", net.out_activation_)
+
+#code related to plotting accuracy over epochs graph.
 matplotlib.pyplot.clf()
 matplotlib.pyplot.plot(range(1,iter),accuracyScores_test, 'r--',label = 'test dataset accuracy')
 matplotlib.pyplot.plot(range(1,iter),accuracyScores_train,'b--',label = 'train dataset accuracy')
@@ -89,5 +97,20 @@ matplotlib.pyplot.xlabel("epochs")
 matplotlib.pyplot.ylabel("accuracy (%)")
 matplotlib.pyplot.savefig('S3AccuracyPlot')
 
-print("output function: ", net.out_activation_)
+#reset var resues here.
+accuracyScores = []
+#two loops one for min leaf size and one for number of trees.
+for leaf_size in [5,50]:
+    for ntrees in [10,50,100,1000,5000]:
 
+        #code generates trains and calculates accuracy for all parameters.
+        rfc = RandomForestClassifier(iter, min_samples_leaf=leaf_size)
+        rfc.fit(x_train, y_train)
+
+        predicted = rfc.predict(x_test)
+        accuracyScores.append(accuracy_score(y_test, predicted))
+
+#creates data frame table to show results more clearly from all runs.
+table = pandas.DataFrame(data= {'5':accuracyScores[0:5], '50':accuracyScores[5:10]})
+table.index=[10,50,100,1000,5000]
+print(table)
