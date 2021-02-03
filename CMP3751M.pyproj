@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1aa2b274-5c7e-471a-84b0-14044d8052b3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>CMP3751M.py</StartupFile>
+    <StartupFile>kfoldCV.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -12,6 +12,7 @@
     <Name>CMP3751M</Name>
     <RootNamespace>CMP3751M</RootNamespace>
     <InterpreterId>CondaEnv|CondaEnv|Anaconda3</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,9 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CMP3751M.py" />
-    <Compile Include="section1.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="CondaEnv|CondaEnv|Anaconda3" />

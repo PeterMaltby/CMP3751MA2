@@ -10,7 +10,7 @@ from sys import getsizeof
 print("numpy version: ", numpy.__version__)
 print("pands version: ", pandas.__version__)
 
-#Data analyses of clinical dataset.xlsx
+#Data analysis of clinical dataset.xlsx
 #Peter Maltby - 2021-02-01
 
 #reads data prints exert and produces stastical measure table output to "dataset_stats.xlsx"
