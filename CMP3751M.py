@@ -70,7 +70,7 @@ accuracyScores_train = []
 
 #iter var states how many epochs of data to run.
 #creates neurel network tiwh 2 hidden layers with 500 nodes each using logisitic activation function.
-iter = 1
+iter = 350
 net = MLPClassifier((500,500),'logistic',max_iter=iter);
 
 #loops through data and records accuracy for each epoch.
@@ -85,7 +85,7 @@ for n in range (1,iter):
     predicted = net.predict(x_train)
     accuracyScores_train.append(accuracy_score(y_train, predicted))
     
-    print("output function: ", net.out_activation_)
+print("output function: ", net.out_activation_)
 
 #code related to plotting accuracy over epochs graph.
 matplotlib.pyplot.clf()
