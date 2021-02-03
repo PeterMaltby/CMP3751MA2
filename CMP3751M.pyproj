@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1aa2b274-5c7e-471a-84b0-14044d8052b3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>kfoldCV.py</StartupFile>
+    <StartupFile>kfoldRF.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

@@ -56,11 +56,11 @@ for z in neurons:
 
 
 matplotlib.pyplot.plot(neurons,accuracy, 'r--')
-matplotlib.pyplot.title("Accuracy of neural network prediction over data iterations.")
+matplotlib.pyplot.title("Average accuracy for neural net predictions over nodes per layer.")
 matplotlib.pyplot.xlabel("nodes per layer")
 matplotlib.pyplot.ylabel("accuracy (%)")
-matplotlib.pyplot.show()
-matplotlib.pyplot.savefig('Average accuracy from neural net for diffrent number of nodes per layer.')
+matplotlib.pyplot.savefig('KfoldNN')
 
 print(neurons)
 print(accuracy)
+
