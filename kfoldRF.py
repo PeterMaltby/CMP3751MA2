@@ -30,7 +30,7 @@ print(y)
 #creates kfold object that shuffles data and produces 10 splits.
 kf = KFold(n_splits=10, shuffle=True, random_state= 1)
 
-#neurel network tests.
+#decision forest tests.
 trees = [10,25,50,75,100,250,500,750,1000]#how mnay trees to use for each pass.
 accuracy = []
 
